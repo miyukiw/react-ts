@@ -7,21 +7,18 @@ import './index.css';
 import configureStore, { history } from './redux/configureStore';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
+import { Router } from 'react-router-dom';
 
 const store = configureStore({});
 
-const renderApp = () => (<App />);
-const renderNotFound = () => (<div>Not Found</div>);
-
 const dom = (
   <Provider store={store}>
-      <ConnectedRouter history={history}> {/* place ConnectedRouter under Provider */}
-      <> {/* your usual react-router v4/v5 routing */}
+      <ConnectedRouter history={history}>
+        <Router history={history}>
           <Switch>
-              <Route exact={true} path="/" render={renderApp} />
-              <Route render={renderNotFound} />
+            <Route path="/" component={App} />
           </Switch>
-      </>
+        </Router>
       </ConnectedRouter>
   </Provider>
 );
